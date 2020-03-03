@@ -31,6 +31,7 @@ curl -X DELETE localhost:8080/todo/1
 
 ### Environment Variable
 
+- ENV_APP_PORT:8080
 - ENV_DB_HOST:localhost
 - ENV_DB_PORT:3306
 - ENV_DB_NAME:todo
