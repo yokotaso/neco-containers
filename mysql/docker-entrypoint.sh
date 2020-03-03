@@ -46,12 +46,12 @@ if [ "$1" = 'mysqld' ]; then
 	DATADIR="$(_get_config 'datadir' "$@")"
 	SOCKET="$(_get_config 'socket' "$@")"
 
-	if [ -n "$MYSQL_LOG_CONSOLE" ] || [ -n "console" ]; then
+#	if [ -n "$MYSQL_LOG_CONSOLE" ] || [ -n "console" ]; then
 		# Don't touch bind-mounted config files
-		if ! cat /proc/1/mounts | grep "etc/my.cnf"; then
-			sed -i 's/^log-error=/#&/' /etc/my.cnf
-		fi
-	fi
+#		if ! cat /proc/1/mounts | grep "etc/my.cnf"; then
+#			sed -i 's/^log-error=/#&/' /etc/my.cnf
+#		fi
+#	fi
 
 	if [ ! -d "$DATADIR/mysql" ]; then
 		# If the password variable is a filename we use the contents of the file. We
@@ -69,8 +69,8 @@ if [ "$1" = 'mysqld' ]; then
 			MYSQL_RANDOM_ROOT_PASSWORD=true
 			MYSQL_ONETIME_PASSWORD=true
 		fi
-		mkdir -p "$DATADIR"
-		chown -R mysql:mysql "$DATADIR"
+#		mkdir -p "$DATADIR"
+#		chown -R mysql:mysql "$DATADIR"
 
 		echo '[Entrypoint] Initializing database'
 		"$@" --initialize-insecure
@@ -192,15 +192,15 @@ EOF
 	# Used by healthcheck to make sure it doesn't mistakenly report container
 	# healthy during startup
 	# Put the password into the temporary config file
-	touch /healthcheck.cnf
-	cat >"/healthcheck.cnf" <<EOF
+	touch /tmp/healthcheck.cnf
+	cat >"/tmp/healthcheck.cnf" <<EOF
 [client]
 user=healthchecker
 socket=${SOCKET}
 password=healthcheckpass
 EOF
-	touch /mysql-init-complete
-	chown -R mysql:mysql "$DATADIR"
+	touch /tmp/mysql-init-complete
+#	chown -R mysql:mysql "$DATADIR"
 	echo "[Entrypoint] Starting MySQL 8.0.19-1.1.15"
 fi
 
