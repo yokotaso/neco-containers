@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${ENV_DB_HOST:localhost}:${ENV_DB_PORT:3306}/${ENV_DB_NAME:todo}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${ENV_DB_USER:root}
-    password: ${ENV_DB_PASSWORD:mysql}
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB_NAME:todo}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:mysql}
     initialization-mode: always
     hikari:
       connectionTimeout: 30000
