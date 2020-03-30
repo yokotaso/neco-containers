@@ -155,6 +155,10 @@ EOF
 			echo
 		done
 
+		# Install plugins for semi-sync
+		echo "INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so';" | "${mysql[@]}"
+		echo "INSTALL PLUGIN rpl_semi_sync_slave SONAME 'semisync_slave.so';" | "${mysql[@]}"
+
 		# When using a local socket, mysqladmin shutdown will only complete when the server is actually down
 		mysqladmin --defaults-extra-file="$PASSFILE" shutdown -uroot --socket="$SOCKET"
 		rm -f "$PASSFILE"
@@ -205,4 +209,3 @@ EOF
 fi
 
 exec "$@"
-
