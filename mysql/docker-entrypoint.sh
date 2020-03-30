@@ -84,7 +84,7 @@ if [ "$1" = 'mysqld' ]; then
 		install /dev/null -m0600 -omysql -gmysql "$PASSFILE"
 		# Define the client command used throughout the script
 		# "SET @@SESSION.SQL_LOG_BIN=0;" is required for products like group replication to work properly
-		mysql=( mysql --defaults-extra-file="$PASSFILE" --protocol=socket -uroot -hlocalhost --socket="$SOCKET" --init-command="SET @@SESSION.SQL_LOG_BIN=0;")
+		mysql=( mysql --defaults-extra-file="$PASSFILE" --protocol=socket -uroot -hlocalhost --socket="$SOCKET" --init-command="SET @@GLOBAL.SUPER_READ_ONLY=OFF; SET @@GLOBAL.OFFLINE_MODE=OFF; SET @@SESSION.SQL_LOG_BIN=0;")
 
 		if [ ! -z "" ];
 		then
