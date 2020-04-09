@@ -132,18 +132,20 @@ EOF
 
 		# Create user for MySQL operator
 		if [ "$MYSQL_OPERATOR_USER" -a "$MYSQL_OPERATOR_PASSWORD" ]; then
-			# echo "CREATE USER '"$MYSQL_OPERATOR_USER"'@'%."$MYSQL_CLUSTER_DOMAIN"' IDENTIFIED BY '"$MYSQL_OPERATOR_PASSWORD"' ;" | "${mysql[@]}"
-			# echo "GRANT SUPER ON *.* TO '"$MYSQL_OPERATOR_USER"'@'%."$MYSQL_CLUSTER_DOMAIN"' ;" | "${mysql[@]}"
 			echo "CREATE USER '"$MYSQL_OPERATOR_USER"'@'%' IDENTIFIED BY '"$MYSQL_OPERATOR_PASSWORD"' ;" | "${mysql[@]}"
 			echo "GRANT SUPER ON *.* TO '"$MYSQL_OPERATOR_USER"'@'%' ;" | "${mysql[@]}"
 		fi
 
 		# Create user for replication
 		if [ "$MYSQL_REPLICATION_USER" -a "$MYSQL_REPLICATION_PASSWORD" ]; then
-			# echo "CREATE USER '"$MYSQL_REPLICATION_USER"'@'%."$MYSQL_CLUSTER_DOMAIN"' IDENTIFIED BY '"$MYSQL_REPLICATION_PASSWORD"' ;" | "${mysql[@]}"
-			# echo "GRANT REPLICATION SLAVE ON *.* TO '"$MYSQL_REPLICATION_USER"'@'%."$MYSQL_CLUSTER_DOMAIN"' ;" | "${mysql[@]}"
 			echo "CREATE USER '"$MYSQL_REPLICATION_USER"'@'%' IDENTIFIED BY '"$MYSQL_REPLICATION_PASSWORD"' ;" | "${mysql[@]}"
 			echo "GRANT REPLICATION SLAVE ON *.* TO '"$MYSQL_REPLICATION_USER"'@'%' ;" | "${mysql[@]}"
+		fi
+
+		# Create user for CLONE donor
+		if [ "$MYSQL_CLONE_DONOR_USER" -a "$MYSQL_CLONE_DONOR_PASSWORD" ]; then
+			echo "CREATE USER '"$MYSQL_CLONE_DONOR_USER"'@'%' IDENTIFIED BY '"$MYSQL_CLONE_DONOR_PASSWORD"' ;" | "${mysql[@]}"
+			echo "GRANT BACKUP_ADMIN on *.* TO '"$MYSQL_CLONE_DONOR_USER"'@'%' ;" | "${mysql[@]}"
 		fi
 
 		if [ "$MYSQL_DATABASE" ]; then

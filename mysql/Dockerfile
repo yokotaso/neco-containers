@@ -14,7 +14,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 FROM oraclelinux:7-slim
 
-ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-8.0.19
+ARG MYSQL_SERVER_PACKAGE=mysql-community-server-8.0.19
 ARG MYSQL_SHELL_PACKAGE=mysql-shell-8.0.19
 
 # Install server
@@ -44,4 +44,3 @@ ENTRYPOINT ["/entrypoint.sh"]
 HEALTHCHECK CMD /healthcheck.sh
 EXPOSE 3306 33060
 CMD ["mysqld"]
-
