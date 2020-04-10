@@ -30,7 +30,9 @@ RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rp
   && pip3 install mysql-connector-python \
   && mkdir /docker-entrypoint-initdb.d \
   && mkdir -p /var/lib/mysql \
-  && chown -R mysql:mysql /var/lib/mysql
+  && chown -R mysql:mysql /var/lib/mysql  \
+  && curl -fsL -o /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc \
+  && chmod +x /usr/local/bin/mc
 
 VOLUME /var/lib/mysql
 
