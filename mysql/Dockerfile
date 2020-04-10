@@ -25,9 +25,7 @@ RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rp
       $MYSQL_SERVER_PACKAGE \
       $MYSQL_SHELL_PACKAGE \
       libpwquality \
-      python3 \
   && yum clean all \
-  && pip3 install mysql-connector-python \
   && mkdir /docker-entrypoint-initdb.d \
   && mkdir -p /var/lib/mysql \
   && chown -R mysql:mysql /var/lib/mysql  \
@@ -35,7 +33,6 @@ RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rp
   && chmod +x /usr/local/bin/mc
 
 VOLUME /var/lib/mysql
-
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY healthcheck.sh /healthcheck.sh
