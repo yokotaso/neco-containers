@@ -32,7 +32,7 @@ RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rp
   && mkdir -p /var/lib/mysql \
   && chown -R mysql:mysql /var/lib/mysql  \
   && curl -fsL -o /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc \
-  && chmod +x mc
+  && chmod +x /usr/local/bin/mc
 
 VOLUME /var/lib/mysql
 
